@@ -1,0 +1,45 @@
+out
+*.log
+
+# atlas data
+refdata
+
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+
+## IntelliJ
+*.iml
+.idea
+.idea_modules
+
+## eclipse
+.cache
+.classpath
+.project
+.settings
+
+#vim
+tags
+*.swp
+*.un~
+
+## Mac stuff
+.DS_Store
+
+.lib
+.bash_history
+
+# Build/deployment generated files
+/common-shipper-configs
+/psw-ci-tools
+/artifacts
+/.metadata
+
