@@ -5,6 +5,8 @@ import org.specs2.mutable.Specification
 import scala.collection.mutable
 
 class SecretSpec extends Specification {
+
+  //TODO: Property testing
   "Secret#evaluateGuess" should {
     "when nothing in common, it returns 0 bull and 0 cow" in {
       val secret = Secret(1, 2, 3, 4)
@@ -40,6 +42,16 @@ class SecretSpec extends Specification {
 
         val expectedResult = Result(cowNum = 2, bullNum = 1)
         secret.evaluateGuess(guess) must beEqualTo(expectedResult)
+      }
+
+      "when there are repetitive numbers" should {
+        "each digit can only count towards the score once, and Bulls are counted before Cows" in {
+          val secret = Secret(3, 3, 4, 5)
+          val guess = Secret(3, 6, 3, 3)
+
+          val expectedResult = Result(cowNum = 1, bullNum = 1)
+          secret.evaluateGuess(guess) must beEqualTo(expectedResult)
+        }
       }
     }
   }
