@@ -119,4 +119,16 @@ class SecretSpec extends Specification with ScalaCheck {
       }
     }
   }
+
+  "Secret#random" should {
+    "generate a secret with size of 4" in {
+      val secret = Secret.random()
+      secret.value.size must beEqualTo(4)
+    }
+
+    "generate a secret with all digits between 0 - 9" in {
+      val secret = Secret.random()
+      secret.value.forall(digit => digit <= 9 && digit >= 0) must beTrue
+    }
+  }
 }

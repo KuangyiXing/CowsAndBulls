@@ -1,5 +1,7 @@
 package cowsandbulls
 
+import scala.util.Random
+
 case class Secret(value: Vector[Int]) {
   def evaluateGuess(guess: Secret): Result = {
     val bullCount = value.zip(guess.value).filter(tuple => tuple._1 == tuple._2).length
@@ -12,5 +14,10 @@ case class Secret(value: Vector[Int]) {
 }
 
 object Secret {
-  def apply(values:Int*): Secret = Secret(values.toVector)
+  def apply(values: Int*): Secret = Secret(values.toVector)
+
+  def random(): Secret = {
+    val secretValue = Vector.fill(4)(Random.nextInt(10))
+    Secret(secretValue)
+  }
 }
