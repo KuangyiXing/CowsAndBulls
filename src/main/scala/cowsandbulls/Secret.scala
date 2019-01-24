@@ -3,7 +3,7 @@ package cowsandbulls
 import scala.util.Random
 
 case class Secret(value: Vector[Int]) {
-  def evaluateGuess(guess: Secret): Result = {
+  def evaluateGuess(guess: Guess): Result = {
     val bullCount = value.zip(guess.value).filter(tuple => tuple._1 == tuple._2).length
     val totalMatchCount = value.intersect(guess.value).length
     Result(
