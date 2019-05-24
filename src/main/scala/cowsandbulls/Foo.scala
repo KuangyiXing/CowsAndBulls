@@ -1,31 +1,39 @@
 package cowsandbulls
 
-import cats.effect.IO
+import cats.effect.{ExitCode, IO, IOApp}
 
-object Foo {
+import scala.io.StdIn
+import scala.util.Random
 
-  def main(args: Array[String]): Unit = {
-//    val foo: IO[Unit] = IO {
-//      println("hello")
-//    }
+object Foo  {
+//object Foo  extends IOApp {
 
-    //foo.unsafeRunSync()
-    val x: IO[Int] = IO {
-      println("hello")
-      Console.readInt()
+
+  def run(args: List[String]): IO[ExitCode] = {
+
+    val myReadln: IO[String] = IO {
+      StdIn.readLine()
     }
 
-//    val result: Int = x.unsafeRunSync()
-//    println(result)
+    def myPrintln(msg: String): IO[Unit] = IO {
+      println(msg)
+    }
 
-    val result: IO[Int] = blah(x, x)
+    val randomNum: IO[Int] = IO.apply {
+      Random.nextInt()
+    }
 
-    val actualResult: Int = result.unsafeRunSync()
+    val result: IO[Unit] = for {
+      line1 <- myReadln
+      line2 <- randomNum
+      ioResult <- myPrintln(s"your lines were $line1 and $line2")
+    } yield ioResult
 
-    println(actualResult)
-  }
 
-  def blah(x: IO[Int], y: IO[Int]): IO[Int] = {
-    x.flatMap(a => y.map(b => a + b))
+    IO{ExitCode.Success}
+
+    IO
+
+    result.map(_ => {println("Made it"); ExitCode.Success})
   }
 }

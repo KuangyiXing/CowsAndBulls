@@ -16,6 +16,8 @@ case class Secret(value: Vector[Int]) {
 object Secret {
   def apply(values: Int*): Secret = Secret(values.toVector)
 
+  def apply(text: String): Secret = Secret(text.toCharArray.map(_.asDigit).toVector)
+
   def random(): Secret = {
     val secretValue = Vector.fill(4)(Random.nextInt(10))
     Secret(secretValue)

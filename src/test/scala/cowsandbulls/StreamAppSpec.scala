@@ -2,14 +2,14 @@ package cowsandbulls
 
 import org.specs2.mutable.Specification
 
-class AppSpec extends Specification {
+class StreamAppSpec extends Specification {
   "App" should {
     val userInput: Stream[String] = Stream(
       "1234",
       "2345"
     )
     val secret = Secret(2,3,4,5)
-    val game = new App(secret)
+    val game = new StreamApp(secret)
     "return stream of results" in {
       val results = game.play(userInput)
       val expectedResults = Stream(

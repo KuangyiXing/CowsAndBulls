@@ -131,4 +131,12 @@ class SecretSpec extends Specification with ScalaCheck {
       secret.value.forall(digit => digit <= 9 && digit >= 0) must beTrue
     }
   }
+
+  "Secret#apply" should {
+    "generate a secret" in {
+      val secret = Secret("1234")
+      val expectedSecret = Secret(1,2,3,4)
+      secret must beEqualTo(expectedSecret)
+    }
+  }
 }
