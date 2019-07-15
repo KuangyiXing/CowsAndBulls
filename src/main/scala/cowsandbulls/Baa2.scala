@@ -4,61 +4,46 @@ import cats.effect.IO
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
+import cats.{Monad, Monoid}
+import cats.implicits._
 
-import cats.Monoid
+import scala.io.StdIn
 
-object Baa2 extends App {
+object Baa2 {
   implicit val ec = ExecutionContext.global
 
-  case class Property(title: String, bedRooms: Int)
-  val x: List[Property] = List(
-    Property("nice home", 3),
-    Property("renovators delight", 2)
-  )
-
-  val propertyMonoid: Monoid[Property] = new Monoid[Property] {
-    override def empty: Property = Property("", 0)
-
-    override def combine(x: Property, y: Property): Property = Property(
-      x.title + y.title,
-      x.bedRooms + y.bedRooms
-    )
+  def main(args: Array[String]): Unit = {
+//    foo.unsafeRunSync()
   }
 
-  private val sum: Property = Monoid.combineAll(x)(propertyMonoid)
+  val read: IO[String] = IO {StdIn.readLine()}
+  def write(x: String): IO[Unit] = IO {println(x)}
 
-  val MyConstant: IO[Int] = IO {
-    fooooo()
+  def foo[M[_]: Monad](
+    myRead: M[String],
+    myWrite: (String) => M[Unit]
+  ): M[Unit] = {
+    for {
+      l1 <- myRead
+      l2 <- myRead
+      _ <- myWrite(l1 + l2)
+    } yield ()
   }
 
-  val abc: IO[Int] = MyConstant
+  foo(read, write)
 
+  case class MyContainer[A](a: A)
 
-  println("the address of ", abc)
+  val read2: MyContainer[String] = MyContainer("fred")
+  def write2(x: String): MyContainer[Unit] = MyContainer(())
 
-  val dfe: IO[Int] = MyConstant.flatMap(_ => MyConstant)
+  val containerM: Monad[MyContainer] = new Monad[MyContainer] {
+    override def pure[A](x: A): MyContainer[A] = ???
 
-  println("the address of ", dfe)
-  def fooooo(): Int = {
-    Thread.sleep(1000)
-    println("hello")
-    43
+    override def flatMap[A, B](fa: MyContainer[A])(f: A => MyContainer[B]): MyContainer[B] = ???
+
+    override def tailRecM[A, B](a: A)(f: A => MyContainer[Either[A, B]]): MyContainer[B] = ???
   }
 
-  println("booo")
-
-  private val result: IO[Int] = dfe.map(_ + 1)
-
-  println("apple")
-
-  val sdfsf: IO[Unit] = result.attempt.map(x => x match {
-      case Right(v) => println(v)
-      case Left(t) => println(t)
-    })
-
-  sdfsf.unsafeRunSync()
-
-  println("almost finished")
-
-  Thread.sleep(5000)
+  foo(read2, write2)(containerM)
 }
