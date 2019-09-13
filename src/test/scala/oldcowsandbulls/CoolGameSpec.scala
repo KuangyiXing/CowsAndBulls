@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 import cats.effect.IO
 import org.specs2.mutable.Specification

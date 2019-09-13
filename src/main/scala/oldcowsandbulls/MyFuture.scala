@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 class MyFuture[A](myFun: () => A) {
   @volatile private var result: Option[A] = None

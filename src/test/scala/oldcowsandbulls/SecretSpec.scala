@@ -1,9 +1,10 @@
-package cowsandbulls
+package oldcowsandbulls
 
 import org.scalacheck.{Arbitrary, Gen}
 import org.specs2.ScalaCheck
 import org.specs2.mutable.Specification
 
+import scala.collection.mutable
 import scala.util.Random
 
 class SecretSpec extends Specification with ScalaCheck {

@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 import scala.io.StdIn
 

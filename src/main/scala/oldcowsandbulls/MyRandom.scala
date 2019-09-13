@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 case class MyRandom(seed: Long) {
   def nextInt : (MyRandom, Int) = {

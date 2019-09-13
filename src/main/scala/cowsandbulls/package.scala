@@ -1,3 +1,3 @@
 package object cowsandbulls {
-  type Guess = Secret
+    type Guess = Secret
 }

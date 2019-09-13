@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 class MyIO[A](myFun: () => A) {
   def run: A = myFun()

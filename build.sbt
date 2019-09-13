@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
 "org.specs2"                      %% "specs2-core"                        % specs2Version    % "test",
 "org.specs2"                      %% "specs2-matcher-extra"               % specs2Version    % "test",
 "org.specs2"                      %% "specs2-scalacheck"                  % specs2Version    % "test",
-"org.typelevel"                   %% "cats-effect"                        % "1.2.0"
+"org.typelevel"                   %% "cats-effect"                        % "1.2.0",
+"org.typelevel"                   %% "cats-free"                        % "1.2.0"
 )

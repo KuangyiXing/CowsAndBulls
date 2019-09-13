@@ -1,4 +1,4 @@
-package cowsandbulls
+package oldcowsandbulls
 
 import cats.Eval
 import cats.data.{IndexedStateT, State}
